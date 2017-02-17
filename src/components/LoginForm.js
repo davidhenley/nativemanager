@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { emailChanged } from '../actions';
 import {
   Container,
   Header,
@@ -15,6 +16,10 @@ import {
   Text } from 'native-base';
 
 class LoginForm extends Component {
+  onEmailChange(text) {
+    this.props.emailChanged(text);
+  }
+
   render() {
     return (
       <Container>
@@ -27,7 +32,10 @@ class LoginForm extends Component {
           <Form>
             <Item floatingLabel>
               <Label>Email</Label>
-              <Input autoCapitalize='none'/>
+              <Input
+                onChangeText={this.onEmailChange.bind(this)}
+                autoCorrect={false}
+                autoCapitalize='none' />
             </Item>
             <Item floatingLabel last>
               <Label>Password</Label>
@@ -49,4 +57,8 @@ const styles = {
   }
 };
 
-export default connect()(LoginForm);
+const mapStateToProps = ({ auth }) => {
+  return { auth };
+};
+
+export default connect(mapStateToProps, { emailChanged })(LoginForm);

@@ -4,6 +4,7 @@ import * as actions from '../actions';
 import {
   Container,
   Content,
+  Body,
   Form,
   Item,
   Label,
@@ -40,6 +41,16 @@ class LoginForm extends Component {
     );
   }
 
+  renderError() {
+    if (this.props.error) {
+      return (
+        <Body style={styles.mt15}>
+          <Text style={{color: 'red'}}>{this.props.error}</Text>
+        </Body>
+      );
+    }
+  }
+
   render() {
     return (
       <Container>
@@ -61,6 +72,7 @@ class LoginForm extends Component {
                 secureTextEntry />
             </Item>
           </Form>
+          {this.renderError()}
           {this.renderButton()}
         </Content>
       </Container>
@@ -78,7 +90,8 @@ const mapStateToProps = ({ auth }) => {
   return {
     email: auth.email,
     password: auth.password,
-    loading: auth.loading
+    loading: auth.loading,
+    error: auth.error
   };
 };
 

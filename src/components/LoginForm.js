@@ -1,45 +1,45 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { emailChanged } from '../actions';
+import { emailChanged, passwordChanged } from '../actions';
 import {
   Container,
-  Header,
-  Body,
   Content,
-  Card,
-  CardItem,
   Form,
   Item,
   Label,
   Input,
   Button,
-  Text } from 'native-base';
+  Text
+} from 'native-base';
 
 class LoginForm extends Component {
   onEmailChange(text) {
     this.props.emailChanged(text);
   }
 
+  onPasswordChange(password) {
+    this.props.passwordChanged(password);
+  }
+
   render() {
     return (
       <Container>
-        <Header>
-          <Body>
-            <Text>Employee Manager</Text>
-          </Body>
-        </Header>
         <Content>
           <Form>
             <Item floatingLabel>
               <Label>Email</Label>
               <Input
+                value={this.props.email}
                 onChangeText={this.onEmailChange.bind(this)}
                 autoCorrect={false}
                 autoCapitalize='none' />
             </Item>
             <Item floatingLabel last>
               <Label>Password</Label>
-              <Input secureTextEntry />
+              <Input
+                value={this.props.password}
+                onChangeText={this.onPasswordChange.bind(this)}
+                secureTextEntry />
             </Item>
           </Form>
           <Button primary full style={styles.mt15}>
@@ -58,7 +58,7 @@ const styles = {
 };
 
 const mapStateToProps = ({ auth }) => {
-  return { auth };
+  return { email: auth.email, password: auth.password };
 };
 
-export default connect(mapStateToProps, { emailChanged })(LoginForm);
+export default connect(mapStateToProps, { emailChanged, passwordChanged })(LoginForm);

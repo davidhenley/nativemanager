@@ -62,6 +62,7 @@ class LoginForm extends Component {
                 value={this.props.email}
                 onChangeText={this.onEmailChange.bind(this)}
                 autoCorrect={false}
+                keyboardType='email-address'
                 autoCapitalize='none' />
             </Item>
             <Item floatingLabel last>

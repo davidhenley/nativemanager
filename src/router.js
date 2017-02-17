@@ -8,8 +8,12 @@ const RouterComponent = () => {
   const { scene } = styles;
   return (
     <Router sceneStyle={scene}>
-      <Scene key="login" title="Please Login" component={LoginForm} />
-      <Scene key="employeelist" title="Employees" component={EmployeeList} />
+      <Scene key="auth">
+        <Scene key="login" title="Please Login" component={LoginForm} />
+      </Scene>
+      <Scene key="main">
+        <Scene key="employeeList" title="Employees" component={EmployeeList} />
+      </Scene>
     </Router>
   );
 };

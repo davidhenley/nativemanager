@@ -10,7 +10,8 @@ import {
   Input,
   Button,
   Text,
-  Spinner
+  Spinner,
+  Content
 } from 'native-base';
 
 class LoginForm extends Component {
@@ -53,25 +54,27 @@ class LoginForm extends Component {
   render() {
     return (
       <Container>
-        <Form>
-          <Item floatingLabel>
-            <Label>Email</Label>
-            <Input
-              value={this.props.email}
-              onChangeText={this.onEmailChange.bind(this)}
-              autoCorrect={false}
-              autoCapitalize='none' />
-          </Item>
-          <Item floatingLabel last>
-            <Label>Password</Label>
-            <Input
-              value={this.props.password}
-              onChangeText={this.onPasswordChange.bind(this)}
-              secureTextEntry />
-          </Item>
-        </Form>
-        {this.renderError()}
-        {this.renderButton()}
+        <Content>
+          <Form>
+            <Item floatingLabel>
+              <Label>Email</Label>
+              <Input
+                value={this.props.email}
+                onChangeText={this.onEmailChange.bind(this)}
+                autoCorrect={false}
+                autoCapitalize='none' />
+            </Item>
+            <Item floatingLabel last>
+              <Label>Password</Label>
+              <Input
+                value={this.props.password}
+                onChangeText={this.onPasswordChange.bind(this)}
+                secureTextEntry />
+            </Item>
+          </Form>
+          {this.renderError()}
+          {this.renderButton()}
+        </Content>
       </Container>
     );
   }

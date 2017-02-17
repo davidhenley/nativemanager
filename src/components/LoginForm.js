@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged } from '../actions';
+import * as actions from '../actions';
 import {
   Container,
   Content,
@@ -9,7 +9,8 @@ import {
   Label,
   Input,
   Button,
-  Text
+  Text,
+  Spinner
 } from 'native-base';
 
 class LoginForm extends Component {
@@ -19,6 +20,24 @@ class LoginForm extends Component {
 
   onPasswordChange(password) {
     this.props.passwordChanged(password);
+  }
+
+  onButtonPress() {
+    const { email, password } = this.props;
+    this.props.loginUser({ email, password });
+  }
+
+  renderButton() {
+    if (this.props.loading) {
+      return <Spinner color='blue' />;
+    }
+    return (
+      <Button
+        onPress={this.onButtonPress.bind(this)}
+        primary full style={styles.mt15}>
+        <Text>Log in</Text>
+      </Button>
+    );
   }
 
   render() {
@@ -42,9 +61,7 @@ class LoginForm extends Component {
                 secureTextEntry />
             </Item>
           </Form>
-          <Button primary full style={styles.mt15}>
-            <Text>Log in</Text>
-          </Button>
+          {this.renderButton()}
         </Content>
       </Container>
     );
@@ -58,7 +75,11 @@ const styles = {
 };
 
 const mapStateToProps = ({ auth }) => {
-  return { email: auth.email, password: auth.password };
+  return {
+    email: auth.email,
+    password: auth.password,
+    loading: auth.loading
+  };
 };
 
-export default connect(mapStateToProps, { emailChanged, passwordChanged })(LoginForm);
+export default connect(mapStateToProps, actions)(LoginForm);

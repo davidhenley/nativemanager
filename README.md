@@ -1,3 +1,3 @@
 # React Native Employee Manager
 
-React Native, Redux, Navigator
+React Native, Redux, NativeBase, Navigator

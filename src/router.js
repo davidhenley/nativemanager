@@ -13,12 +13,11 @@ const RouterComponent = () => {
   const { scene } = styles;
   return (
     <Router sceneStyle={scene}>
-      <Scene initial key="auth">
-        <Scene initial key="login" title="Please Login" component={LoginForm} />
+      <Scene key="auth">
+        <Scene key="login" title="Please Login" component={LoginForm} />
       </Scene>
       <Scene key="main">
         <Scene
-          initial
           key="employeeList"
           title="Employees"
           rightTitle={<Icon name="add" />}
